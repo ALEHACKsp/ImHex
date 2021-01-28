@@ -185,6 +185,7 @@ macro(createPackage)
                 )
         endforeach()
     ]])
+
     endif()
 
     add_custom_command(TARGET magic_dbs
@@ -192,8 +193,15 @@ macro(createPackage)
             )
 
     # Install the magicdb files.
+    if (${EXTRA_MAGICDBS})
+        if (WIN32)
+            string(REPLACE ";" " " EXTRA_MAGICDBS ${EXTRA_MAGICDBS})
+        else ()
+            string(REPLACE ":" " " EXTRA_MAGICDBS ${EXTRA_MAGICDBS})
+        endif ()
+    endif ()
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/magic_dbs.mgc DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/magic/ RENAME imhex.mgc)
-    install(FILES ${EXTRA_MAGICDBS} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/magic/)
+    install(DIRECTORY ${EXTRA_MAGICDBS} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/magic/)
 
     if (CREATE_BUNDLE)
         include(PostprocessBundle)

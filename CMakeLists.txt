@@ -14,11 +14,11 @@ set(PLUGINS
         builtin
         )
 
-# List extra magic databases to compile here
-set(MAGICDBS
-        magic_dbs/nintendo_magic
+# Compile the imhex-specific magicdb
+add_custom_target(magic_dbs ALL
+        SOURCES magic_dbs/nintendo_magic
         )
-createMagicDbList()
+#createMagicDbList()
 
 findLibraries()
 

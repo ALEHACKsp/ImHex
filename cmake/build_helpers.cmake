@@ -187,17 +187,13 @@ macro(createPackage)
     ]])
     endif()
 
-    # Compile the imhex-specific magicdb
-    add_custom_target(magic_dbs ALL
-            SOURCES magic_dbs/nintendo_magic
-            )
     add_custom_command(TARGET magic_dbs
             COMMAND file -C -m ${CMAKE_SOURCE_DIR}/magic_dbs
             )
 
     # Install the magicdb files.
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/magic_dbs.mgc DESTINATION magic/ RENAME imhex.mgc)
-    install(FILES ${EXTRA_MAGICDBS} DESTINATION magic/)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/magic_dbs.mgc DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/magic/ RENAME imhex.mgc)
+    install(FILES ${EXTRA_MAGICDBS} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/magic/)
 
     if (CREATE_BUNDLE)
         include(PostprocessBundle)

@@ -42,7 +42,7 @@ jobs:
         mkdir build
         cd build
         CC=gcc-10 CXX=g++-10 cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCREATE_PACKAGE=ON ..
-        make -j 4 package
+        make -j 4 install
 
     - name: 📦 Upload ELF
       uses: actions/upload-artifact@v2
